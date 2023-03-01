@@ -24,20 +24,62 @@ class Highlights extends StatelessWidget {
               ),
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return HighlightItem(
-                  imageURI: items[index]['image'],
-                  itemTitle: items[index]['name'],
-                  itemPrice: items[index]['price'],
-                  itemDescription: items[index]['description'],
-                );
-              },
-              childCount: items.length,
-            ),
-          )
+          isLandscape(context) ? const _LandscapeList() : const _PortraitList()
         ],
+      ),
+    );
+  }
+
+  bool isLandscape(BuildContext context) {
+    return MediaQuery.of(context).orientation == Orientation.landscape;
+  }
+}
+
+class _PortraitList extends StatelessWidget {
+  const _PortraitList({Key? key}) : super(key: key);
+
+  final List items = destaques;
+  @override
+  Widget build(BuildContext context) {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          return HighlightItem(
+            imageURI: items[index]['image'],
+            itemTitle: items[index]['name'],
+            itemPrice: items[index]['price'],
+            itemDescription: items[index]['description'],
+          );
+        },
+        childCount: items.length,
+      ),
+    );
+  }
+}
+
+class _LandscapeList extends StatelessWidget {
+  const _LandscapeList({Key? key}) : super(key: key);
+
+  final List items = destaques;
+  @override
+  Widget build(BuildContext context) {
+    return SliverGrid(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          return HighlightItem(
+            imageURI: items[index]['image'],
+            itemTitle: items[index]['name'],
+            itemPrice: items[index]['price'],
+            itemDescription: items[index]['description'],
+          );
+        },
+        childCount: items.length,
+      ),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 8,
+        mainAxisSpacing: 8,
+        childAspectRatio: 1,
       ),
     );
   }

@@ -23,7 +23,7 @@ class HighlightItem extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Image(
-            height: 120,
+            height: 110,
             width: double.infinity,
             image: AssetImage(imageURI),
             fit: BoxFit.cover,
@@ -37,7 +37,7 @@ class HighlightItem extends StatelessWidget {
                   itemTitle,
                   style: const TextStyle(fontSize: 16),
                 ),
-                Text("R\$ " + itemPrice),
+                Text("R\$ $itemPrice"),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(itemDescription),
